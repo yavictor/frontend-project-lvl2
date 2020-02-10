@@ -2,7 +2,8 @@
   "name": "frontend-project-lvl2_yv",
   "version": "1.0.1",
   "description": "Compare two config files, shows whats new '+', what deleted '-'",
-  "main": "bin/gendiff",
+  "main": "src/index.js",
+  "type": "module",
   "bin": {
     "gendiff": "bin/gendiff"
   },
@@ -39,10 +40,10 @@
     "@babel/core": "^7.5.5",
     "@babel/node": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "babel-eslint": "^10.0.2",
-    "eslint": "^6.1.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-babel": "^5.3.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.20.1"
   }
 }
