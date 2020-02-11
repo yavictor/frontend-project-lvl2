@@ -1,6 +1,6 @@
 #!/usr/bin/env node
+
 import program from 'commander';
-// eslint-disable-next-line import/extensions
 import genDiff from '..';
 
 program
@@ -12,5 +12,3 @@ program
   .action((firstConfig, secondConfig) => console.log(genDiff(firstConfig, secondConfig)));
 
 program.parse(process.argv);
-
-//console.log(__dirname);
