@@ -1,7 +1,9 @@
 #!/usr/bin/env node
+
+
 import program from 'commander';
 // eslint-disable-next-line import/extensions
-import genDiff from '../src/index.js';
+import genDiff from '../index.js';
 
 program
   .description('Compares two configuration files and shows a difference.')
@@ -12,5 +14,3 @@ program
   .action((firstConfig, secondConfig) => console.log(genDiff(firstConfig, secondConfig)));
 
 program.parse(process.argv);
-
-//console.log(__dirname);

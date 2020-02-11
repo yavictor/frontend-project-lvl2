@@ -2,13 +2,16 @@
   "name": "frontend-project-lvl2_yv",
   "version": "1.0.1",
   "description": "Compare two config files, shows whats new '+', what deleted '-'",
-  "main": "src/index.js",
   "type": "module",
+  "main": "src/index.js",
   "bin": {
     "gendiff": "bin/gendiff"
   },
+  "engines": {
+    "node": ">=13"
+  },
   "files": [
-    "bin"
+    "dist"
   ],
   "keywords": [
     "cli",
@@ -17,7 +20,7 @@
     "JSON"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
     "prepublishOnly": "npm run build"
   },
@@ -25,10 +28,13 @@
     "type": "git",
     "url": "git+https://github.com/yavictor/frontend-project-lvl2.git"
   },
-  "author": "ya_victor",
+  "author": "ya_victor <yavictor37@yandex.ru>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/yavictor/frontend-project-lvl2/issues"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "homepage": "https://github.com/yavictor/frontend-project-lvl2#readme",
   "dependencies": {
@@ -36,14 +42,20 @@
     "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
-    "@babel/node": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
     "babel-eslint": "^10.0.3",
-    "eslint": "^6.8.0",
+    "babel-jest": "^25.1.0",
+    "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-babel": "^5.3.0",
-    "eslint-plugin-import": "^2.20.1"
+    "eslint-plugin-flowtype": "^3.2.1",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jest": "^23.6.0",
+    "eslint-plugin-lodash-fp": "^2.2.0-a1",
+    "jest": "^25.1.0",
+    "jest-cli": "^25.1.0"
   }
 }

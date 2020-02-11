@@ -6,7 +6,7 @@ export default (firstConfig, secondConfig) => {
   const secondObject = JSON.parse(fs.readFileSync(secondConfig, 'utf-8'));
   const result = ['{'];
   const mergedObject = { ...firstObject, ...secondObject };
-  Object.keys(mergedObject).map(key => {
+  Object.keys(mergedObject).forEach((key) => {
     if (_.has(firstObject, key) && _.has(secondObject, key) && firstObject[`${key}`] === secondObject[`${key}`]) {
       result.push(`  ${key}: ${firstObject[`${key}`]}`);
     } else if (_.has(firstObject, key) && _.has(secondObject, key) && firstObject[`${key}`] !== secondObject[`${key}`]) {
@@ -19,5 +19,5 @@ export default (firstConfig, secondConfig) => {
     }
   });
   result.push('}');
-  return result;
+  return result.join('\n');
 };
