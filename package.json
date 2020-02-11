@@ -2,7 +2,6 @@
   "name": "frontend-project-lvl2_yv",
   "version": "1.0.1",
   "description": "Compare two config files, shows whats new '+', what deleted '-'",
-  "type": "module",
   "main": "src/index.js",
   "bin": {
     "gendiff": "bin/gendiff"
