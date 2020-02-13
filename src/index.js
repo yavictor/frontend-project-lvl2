@@ -1,9 +1,7 @@
 import _ from 'lodash';
 import fs from 'fs';
 
-export default (firstConfig, secondConfig) => {
-  const firstObject = JSON.parse(fs.readFileSync(firstConfig, 'utf-8'));
-  const secondObject = JSON.parse(fs.readFileSync(secondConfig, 'utf-8'));
+export default (firstObject, secondObject) => {
   const result = ['{'];
   const mergedObject = { ...firstObject, ...secondObject };
   Object.keys(mergedObject).forEach((key) => {
