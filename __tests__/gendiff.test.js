@@ -20,3 +20,10 @@ test('take difference yaml', () => {
   const result = genDiff(firstConfig, secondConfig);
   expect(expectedResult).toEqual(result);
 });
+
+test('take difference ini', () => {
+  const firstConfig = parser(getFixturePath('before.ini'));
+  const secondConfig = parser(getFixturePath('after.ini'));
+  const result = genDiff(firstConfig, secondConfig);
+  expect(expectedResult).toEqual(result);
+});
