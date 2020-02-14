@@ -4,7 +4,7 @@ import program from 'commander';
 import fs from 'fs';
 import genDiff from '..';
 //import path from 'path';
-import parser from './parsers';
+import parser from '../parsers';
 
 program
   .description('Compares two configuration files and shows a difference.')

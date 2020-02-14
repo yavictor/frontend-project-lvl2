@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import genDiff from '..';
-import parser from '../dist/bin/parsers';
+import parser from '../src/parsers';
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
