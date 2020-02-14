@@ -3,6 +3,8 @@
 import program from 'commander';
 import fs from 'fs';
 import genDiff from '..';
+//import path from 'path';
+import parser from './parsers';
 
 program
   .description('Compares two configuration files and shows a difference.')
@@ -11,8 +13,10 @@ program
   .version('0.1.0')
   .arguments('<firstConfig> <secondConfig>')
   .action((firstConfig, secondConfig) => {
-    const firstObject = JSON.parse(fs.readFileSync(firstConfig, 'utf-8'));
-    const secondObject = JSON.parse(fs.readFileSync(secondConfig, 'utf-8'));
+    //const firstObject = JSON.parse(fs.readFileSync(firstConfig, 'utf-8'));
+    const firstObject = parser(firstConfig);
+    //const secondObject = JSON.parse(fs.readFileSync(secondConfig, 'utf-8'));
+    const secondObject = parser(secondConfig);
     console.log(genDiff(firstObject, secondObject));
   });
 
