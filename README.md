@@ -9,8 +9,8 @@
 
 # Show difference between two Json Files
 
-<a href="https://asciinema.org/a/PXv7IKbiH2lLtxgApKYNu6uZ9" target="_blank"><img src="https://asciinema.org/a/PXv7IKbiH2lLtxgApKYNu6uZ9.svg" /></a>
+[![asciicast](https://asciinema.org/a/PXv7IKbiH2lLtxgApKYNu6uZ9.svg)](https://asciinema.org/a/PXv7IKbiH2lLtxgApKYNu6uZ9)
 
 # Show difference between two Yml Files
 
-<a href="https://asciinema.org/a/zmZPN5zknY4W8qgg7nc68cOGG" target="_blank"><img src="https://asciinema.org/a/zmZPN5zknY4W8qgg7nc68cOGG.svg" /></a>
+[![asciicast](https://asciinema.org/a/zmZPN5zknY4W8qgg7nc68cOGG.svg)](https://asciinema.org/a/zmZPN5zknY4W8qgg7nc68cOGG)
