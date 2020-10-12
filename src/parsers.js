@@ -3,7 +3,7 @@ import path from 'path';
 import yaml from 'js-yaml';
 import ini from 'ini';
 
-const getData = (filePath) => fs.readFileSync(filePath, 'utf-8');
+const getData = filePath => fs.readFileSync(filePath, 'utf-8');
 
 export default (configPath) => {
   const format = path.extname(configPath);

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 import program from 'commander';
-import fs from 'fs';
-import genDiff from '..';
+//import fs from 'fs';
+import genDiff from '../src/index.js';
 //import path from 'path';
-import parser from '../parsers';
+import parser from '../src/parsers.js';
 
 program
   .description('Compares two configuration files and shows a difference.')
