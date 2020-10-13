@@ -13,9 +13,7 @@ program
   .version('0.1.0')
   .arguments('<firstConfig> <secondConfig>')
   .action((firstConfig, secondConfig) => {
-    //const firstObject = JSON.parse(fs.readFileSync(firstConfig, 'utf-8'));
     const firstObject = parser(firstConfig);
-    //const secondObject = JSON.parse(fs.readFileSync(secondConfig, 'utf-8'));
     const secondObject = parser(secondConfig);
     console.log(genDiff(firstObject, secondObject));
   });

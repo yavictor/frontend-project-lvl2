@@ -1,61 +1,34 @@
 import _ from 'lodash';
 import fs from 'fs';
 
-var firstObject = {};
-var secondObject = {};
-let mergedObject = {};
-const result = ['{'];
+export default (firstObject, secondObject) => {
+  //console.log('cloneDeep is', _.cloneDeep([firstConfig, secondConfig]));
+  const result = ['{'];
+  const mergedKeys = [...Object.keys(firstObject), ...Object.keys(secondObject)];
+  console.log('rest merge ', mergedKeys);
+  //console.log('firstObject', firstObject, 'secondObject', secondObject);
+  
+  const render = (item) => {
+    console.log('render item: ', item);
+    console.log('_.has(firstObject, item)', _.has(firstObject, item), '_.has(secondObject, item)', _.has(secondObject, item));
+    console.log('firstObject[item]', firstObject[item], 'secondObject[item]', secondObject[item], 'firstObject[item] === secondObject[item]', firstObject[item] === secondObject[item])
+    if (_.has(firstObject, item) && _.has(secondObject, item) && firstObject[item] === secondObject[item]) {
+      return (`   ${item}: ${firstObject[item]}`);
+    } else if (_.has(firstObject, item) && _.has(secondObject, item) && firstObject[item] !== secondObject[item]) {
+      return (` - ${item}: ${firstObject[item]}
+ + ${item}: ${secondObject[item]}`);
+    } else if (_.has(firstObject, item) && !_.has(secondObject, item)) {
+      return (` - ${item}: ${firstObject[item]}`);
+    } else if (!_.has(firstObject, item) && _.has(secondObject, item)) {
+      return (` + ${item}: ${secondObject[item]}`);
+    } else {
+      return (`+ ${item}`);
+    }
+  };
 
-const render = (item) => {
-  const resultRender = [];
-  if (_.has(firstObject, item) && _.has(secondObject, item) && firstObject[`${item}`] === secondObject[`${item}`]) {
-    resultRender.push(`  ${item}: ${firstObject[`${item}`]}`);
-  } else if (_.has(firstObject, item) && _.has(secondObject, item) && firstObject[`${item}`] !== secondObject[`${item}`]) {
-    resultRender.push(`+ ${item}: ${firstObject[`${item}`]}`);
-    resultRender.push(`- ${item}: ${secondObject[`${item}`]}`);
-  } else if (_.has(firstObject, item) && !_.has(secondObject, item)) {
-    resultRender.push(`- ${item}: ${firstObject[`${item}`]}`);
-  } else if (!_.has(firstObject, item) && _.has(secondObject, item)) {
-    resultRender.push(`+ ${item}: ${secondObject[`${item}`]}`);
-  } else {
-    resultRender.push(`+ ${item}`);
-  }
-  return resultRender;
-};
+  const iter = (config) => config.forEach((key) => result.push(render(key)));
 
-const iter = (config) => {
-  console.log(config);
-  console.log('Type of config', typeof config);
-  if (typeof config === 'string') {
-    //console.log('Type of key', typeof key, 'Instance of');
-    //console.log('Key to render', key);
-    result.push(render(config));
-  } else {
-    console.log('Object keys arr ', Object.keys(config));
-    //console.log('Config common ', config.common);
-    Object.keys(config).forEach((key) => {
-      console.log('Object key ', key);
-      console.log('Object key value ', config[`${key}`]);
-      if (typeof config[`${key}`] === 'object') {
-        result.push(render(key));
-        iter(config[`${key}`]);
-      } else {
-        result.push(render(key));
-      }
-    });
-  }
-};
-
-export default (firstConfig, secondConfig) => {
-  firstObject = firstConfig;
-  console.log('first', (firstObject));
-  secondObject = secondConfig;
-  console.log('second', secondObject);
-  //const keysArray = _.uniq(_.concat(_.toPairs(firstObject), _.values(secondObject)));
-  mergedObject = _.merge(firstObject, secondObject);
-  //console.log('merged', mergedObject);
-  //console.log('keys', keysArray);
-  iter(mergedObject);
+  iter(_.uniq(mergedKeys));
   result.push('}');
   return result.join('\n');
 };
