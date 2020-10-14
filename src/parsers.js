@@ -3,15 +3,14 @@ import path from 'path';
 import yaml from 'js-yaml';
 import ini from 'ini';
 
-const getData = filePath => fs.readFileSync(filePath, 'utf-8');
-
 export default (configPath) => {
+  const data = fs.readFileSync(configPath, 'utf-8');
   const format = path.extname(configPath);
   if (format === '.json') {
-    return JSON.parse(getData(configPath));
+    return JSON.parse(data);
   } if (format === '.yml') {
-    return yaml.safeLoad(getData(configPath));
+    return yaml.safeLoad(data);
   } if (format === '.ini') {
-    return ini.parse(getData(configPath));
+    return ini.parse(data);
   }
 };

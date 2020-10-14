@@ -8,11 +8,8 @@
     "gendiff": "bin/gendiff"
   },
   "engines": {
-    "node": ">=13"
+    "node": ">=14"
   },
-  "files": [
-    "dist"
-  ],
   "keywords": [
     "cli",
     "gendiff",
@@ -20,8 +17,7 @@
     "JSON"
   ],
   "scripts": {
-    "test": "jest",
-    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "test": "npx -n --experimental-vm-modules jest",
     "prepublishOnly": "npm run build"
   },
   "repository": {
@@ -34,7 +30,8 @@
     "url": "https://github.com/yavictor/frontend-project-lvl2/issues"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "transform": {}
   },
   "homepage": "https://github.com/yavictor/frontend-project-lvl2#readme",
   "dependencies": {
