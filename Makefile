@@ -5,7 +5,7 @@ help:
 	bin/gendiff.js -h
 
 run:
-	bin/gendiff.js __fixtures__/before.json __fixtures__/after.json
+	bin/gendiff.js before.json after.json
 
 install-deps:
 	npm ci
