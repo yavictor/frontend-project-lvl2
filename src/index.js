@@ -26,21 +26,15 @@ export default (firstConfig, secondConfig) => {
   //console.log('firstObject', firstObject, 'secondObject', secondObject);
   
   const render = (item) => {
-    //console.log('render item: ', item);
-    //console.log('_.has(firstObject, item)', _.has(firstObject, item), '_.has(secondObject, item)', _.has(secondObject, item));
-    //console.log('firstObject[item]', firstObject[item], 'secondObject[item]', secondObject[item], 'firstObject[item] === secondObject[item]', firstObject[item] === secondObject[item])
-    if (_.has(firstObject, item) && _.has(secondObject, item) && firstObject[item] === secondObject[item]) {
+    if (firstObject[item] === secondObject[item]) {
       return (`   ${item}: ${firstObject[item]}`);
-    } else if (_.has(firstObject, item) && _.has(secondObject, item) && firstObject[item] !== secondObject[item]) {
-      return (` - ${item}: ${firstObject[item]}
- + ${item}: ${secondObject[item]}`);
-    } else if (_.has(firstObject, item) && !_.has(secondObject, item)) {
+    } if (!_.has(secondObject, item)) {
       return (` - ${item}: ${firstObject[item]}`);
-    } else if (!_.has(firstObject, item) && _.has(secondObject, item)) {
+    } if (!_.has(firstObject, item)) {
       return (` + ${item}: ${secondObject[item]}`);
-    } else {
-      return (`+ ${item}`);
     }
+    return (` - ${item}: ${firstObject[item]}
+ + ${item}: ${secondObject[item]}`);
   };
 
   const iter = (config) => config.forEach((key) => result.push(render(key)));
