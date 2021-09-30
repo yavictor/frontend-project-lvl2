@@ -6,6 +6,8 @@
 
 [![Issue Count](https://codeclimate.com/github/yavictor/frontend-project-lvl2/badges/issue_count.svg)](https://codeclimate.com/github/yavictor/frontend-project-lvl2)
 
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a42983ea9e9db2238a78/test_coverage)](https://codeclimate.com/github/yavictor/frontend-project-lvl2/test_coverage)
+
 
 # Show difference between two 'json' Files
 
