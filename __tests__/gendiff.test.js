@@ -21,8 +21,8 @@ test('take difference JSON', () => {
 });
 
 test('take difference yaml', () => {
-  const firstConfig = 'before.yml';
-  const secondConfig = 'after.yml';
+  const firstConfig = 'file1.yml';
+  const secondConfig = 'file2.yml';
   const result = genDiff(firstConfig, secondConfig);
   expect(result).toBe(expected);
 });
