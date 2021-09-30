@@ -36,8 +36,8 @@ test('take difference ini', () => {
 
 test('take difference with nested JSON files', () => {
   const firstConfig = 'beforeNested.json';
-  const secondConfig = 'afterNested.json';
-  const result = genDiff(firstConfig, secondConfig);
+  const secondConfig = '/__fixtures__/afterNested.json';
+  const result = genDiff(firstConfig, secondConfig, 'stylish');
   expect(result).toBe(expectedNested);
 });
 

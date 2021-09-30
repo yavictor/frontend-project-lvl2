@@ -4,10 +4,10 @@ import renderPlain from './plain.js';
 
 export default (data, format) => {
   switch (format) {
-    case 'json':
-      return renderJson(data);
     case 'stylish':
       return renderStylish(data);
+    case 'json':
+      return renderJson(data);
     case 'plain':
       return renderPlain(data);
     default:

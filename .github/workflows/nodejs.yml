@@ -3,9 +3,18 @@ name: Node CI
 
 # Trigger the workflow on push or pull request
 on:
-  - push
-  - pull_request
-
+  push:
+    branches:
+      - master
+    tags:
+      - '!*' # Do not execute on tags
+    paths:
+      - src/*
+      - test/*
+      - '*.json'
+  pull_request:
+    paths:
+      - '!*.MD'
 jobs:
   build:
 
