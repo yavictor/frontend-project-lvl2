@@ -10,41 +10,47 @@ const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', 
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 const expected = readFile('result.txt');
 const expectedNested = readFile('resultNested.txt');
-//console.log('expected', expected);
+const expectedNestedPlain = readFile('resultNestedPlain.txt');
+const expectedNestedJson = readFile('resultNestedJson.txt');
 
-test.each`
-  a                | b               | expected
-  ${'before.json'} | ${'after.json'} | ${readFile('result.txt')}
-  ${'before.yml'}  | ${'after.yml'}  | ${readFile('result.txt')}
-  ${'before.ini'}  | ${'after.ini'}  | ${readFile('result.txt')}
-`('', ({a, b, expected}) => {
-  expect(genDiff(a, b)).toBe(expected);
+test('take difference JSON', () => {
+  const firstConfig = 'before.json';
+  const secondConfig = 'after.json';
+  const result = genDiff(firstConfig, secondConfig);
+  expect(result).toBe(expected);
 });
 
-// test('take difference JSON', () => {
-//   const firstConfig = ('__fixtures__/before.json');
-//   const secondConfig = ('__fixtures__/after.json');
-//   const result = genDiff(firstConfig, secondConfig);
-//   expect(result).toEqual(expected);
-// });
+test('take difference yaml', () => {
+  const firstConfig = 'before.yml';
+  const secondConfig = 'after.yml';
+  const result = genDiff(firstConfig, secondConfig);
+  expect(result).toBe(expected);
+});
 
-// test('take difference yaml', () => {
-//   const firstConfig = ('__fixtures__/before.yml');
-//   const secondConfig = ('__fixtures__/after.yml');
-//   const result = genDiff(firstConfig, secondConfig);
-//   expect(result).toEqual(expected);
-// });
+test('take difference ini', () => {
+  const firstConfig = 'before.ini';
+  const secondConfig = 'after.ini';
+  const result = genDiff(firstConfig, secondConfig);
+  expect(result).toBe(expected);
+});
 
-// test('take difference ini', () => {
-//   const firstConfig = ('__fixtures__/before.ini');
-//   const secondConfig = ('__fixtures__/after.ini');
-//   const result = genDiff(firstConfig, secondConfig);
-//   expect(result).toEqual(expected);
-// });
+test('take difference with nested JSON files', () => {
+  const firstConfig = 'beforeNested.json';
+  const secondConfig = 'afterNested.json';
+  const result = genDiff(firstConfig, secondConfig);
+  expect(result).toBe(expectedNested);
+});
 
-// test('take difference nested JSON', () => {
-//   const firstConfig = parser(getFixturePath('beforeNested.json'));
-//   const secondConfig = parser(getFixturePath('afterNested.json'));
-//   const result = genDiff(firstConfig, secondConfig);
-//   expect(result).toEqual(expectedNested);
-// });
+test('take difference with nested JSON files, plain output', () => {
+  const firstConfig = 'beforeNested.json';
+  const secondConfig = 'afterNested.json';
+  const result = genDiff(firstConfig, secondConfig, 'plain');
+  expect(result).toBe(expectedNestedPlain);
+});
+
+test('take difference with nested JSON files, JSON output', () => {
+  const firstConfig = 'beforeNested.json';
+  const secondConfig = 'afterNested.json';
+  const result = genDiff(firstConfig, secondConfig, 'json');
+  expect(result).toBe(expectedNestedJson);
+});

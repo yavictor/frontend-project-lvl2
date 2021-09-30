@@ -1,11 +1,11 @@
 {
-  "name": "frontend-project-lvl2_yv",
+  "name": "@hexlet/code",
   "version": "1.0.1",
   "description": "Compare two config files, shows whats new '+', what deleted '-'",
   "main": "src/index.js",
   "type": "module",
   "bin": {
-    "gendiff": "bin/gendiff"
+    "gendiff": "bin/gendiff.js"
   },
   "engines": {
     "node": ">=14"
@@ -17,7 +17,7 @@
     "JSON"
   ],
   "scripts": {
-    "test": "npx -n --experimental-vm-modules jest",
+    "test": "npx jest --bail",
     "prepublishOnly": "npm run build"
   },
   "repository": {
@@ -41,8 +41,8 @@
     "lodash": "^4.17.20"
   },
   "devDependencies": {
-    "@jest/globals": "^26.4.2",
-    "eslint": "^7.9.0",
+    "@jest/globals": "^27.0.1",
+    "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jest": "^24.0.2",

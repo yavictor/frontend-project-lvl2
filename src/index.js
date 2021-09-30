@@ -1,45 +1,59 @@
 import _ from 'lodash';
-import { fileURLToPath } from 'url';
 import fs from 'fs';
 import path from 'path';
+import { cwd } from 'process';
 import parser from './parsers.js';
+import format from './formatters/index.js';
 
 const getData = (filename) => {
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename);
-  const getFixturePath = (filename) =>  path.join(__dirname, '..', '__fixtures__', filename);
-  const readFile = fs.readFileSync(getFixturePath(filename), 'utf-8');
-  const readExtension = path.extname(filename);
-  return [readFile, readExtension];
+  let fullPath = '';
+  const pathElements = path.parse(filename);
+  if (!pathElements.dir) {
+    fullPath = path.join(cwd(), '__fixtures__', filename);
+  } else {
+    fullPath = path.join(cwd(), filename);
+  }
+  const fileContent = fs.readFileSync(fullPath, 'utf-8');
+  const extension = pathElements.ext;
+  return [fileContent, extension];
 };
 
-export default (firstConfig, secondConfig) => {
-  //console.log('first & second configs', firstConfig, secondConfig);
-  //console.log('getData(firstConfig)', getData(firstConfig));
-  //const getData = [getData(firstConfig), getData(secondConfig)]
+const createNode = (key, type, oldValue, newValue, children = null) => (
+  {
+    key,
+    type,
+    oldValue,
+    newValue,
+    children,
+  }
+);
+
+const generateTree = (firstData, secondData) => {
+  const firstDataKeys = Object.keys(firstData);
+  const secondDataKeys = Object.keys(secondData);
+  const uniqKeys = _.uniq([...firstDataKeys, ...secondDataKeys]);
+  const sortedKeys = uniqKeys.sort();
+
+  return sortedKeys.map((key) => {
+    if (firstData[key] === secondData[key]) {
+      return createNode(key, 'unchanged', firstData[key], secondData[key]);
+    } if (!firstDataKeys.includes(key)) {
+      return createNode(key, 'added', null, secondData[key]);
+    } if (!secondDataKeys.includes(key)) {
+      return createNode(key, 'removed', firstData[key], null);
+    } if (firstData[key] instanceof Object && secondData[key] instanceof Object) {
+      return createNode(key, 'complex', null, null,
+        generateTree(firstData[key], secondData[key]));
+    }
+    return createNode(key, 'updated', firstData[key], secondData[key]);
+  });
+};
+
+const genDiff = (firstConfig, secondConfig, output = 'stylish') => {
   const firstObject = parser(getData(firstConfig));
   const secondObject = parser(getData(secondConfig));
-  //console.log('firstObject', firstObject, 'secondObject', secondObject);
-  const result = ['{'];
-  const mergedKeys = [...Object.keys(firstObject), ...Object.keys(secondObject)];
-  //console.log('rest merge ', mergedKeys);
-  //console.log('firstObject', firstObject, 'secondObject', secondObject);
-  
-  const render = (item) => {
-    if (firstObject[item] === secondObject[item]) {
-      return (`   ${item}: ${firstObject[item]}`);
-    } if (!_.has(secondObject, item)) {
-      return (` - ${item}: ${firstObject[item]}`);
-    } if (!_.has(firstObject, item)) {
-      return (` + ${item}: ${secondObject[item]}`);
-    }
-    return (` - ${item}: ${firstObject[item]}
- + ${item}: ${secondObject[item]}`);
-  };
-
-  const iter = (config) => config.forEach((key) => result.push(render(key)));
-
-  iter(_.uniq(mergedKeys));
-  result.push('}');
-  return result.join('\n');
+  const tree = generateTree(firstObject, secondObject);
+  return format(tree, output);
 };
+
+export default genDiff;
