@@ -1,5 +1,4 @@
-install:
-	install-deps
+install: install-deps
 
 help:
 	bin/gendiff -h
