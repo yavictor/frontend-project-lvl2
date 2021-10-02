@@ -31,7 +31,7 @@ const generateTree = (firstData, secondData) => {
   const firstDataKeys = Object.keys(firstData);
   const secondDataKeys = Object.keys(secondData);
   const uniqKeys = _.uniq([...firstDataKeys, ...secondDataKeys]);
-  const sortedKeys = uniqKeys.sort();
+  const sortedKeys = _.sortBy(uniqKeys);
 
   return sortedKeys.map((key) => {
     if (firstData[key] === secondData[key]) {
