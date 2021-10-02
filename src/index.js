@@ -1,19 +1,18 @@
 import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
-import { cwd } from 'process';
+import { fileURLToPath } from 'url';
 import parser from './parsers.js';
 import format from './formatters/index.js';
 
 const getData = (filename) => {
-  let fullPath = '';
   const pathElements = path.parse(filename);
-  if (!pathElements.dir) {
-    fullPath = path.join(cwd(), '__fixtures__', filename);
-  } else {
-    fullPath = path.join(cwd(), filename);
-  }
-  const fileContent = fs.readFileSync(fullPath, 'utf-8');
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const getFixturePath = (pathname) => path.join(__dirname, '..', '__fixtures__', pathname);
+  const readFile = (file) => fs.readFileSync(getFixturePath(file), 'utf-8');
+  const fileContent = readFile(pathElements.base);
+
   const extension = pathElements.ext;
   return [fileContent, extension];
 };
