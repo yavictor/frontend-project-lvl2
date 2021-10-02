@@ -14,8 +14,8 @@ const expectedNestedPlain = readFile('resultNestedPlain.txt');
 const expectedNestedJson = readFile('resultNestedJson.txt');
 
 test('take difference JSON', () => {
-  const firstConfig = 'before.json';
-  const secondConfig = 'after.json';
+  const firstConfig = 'after.json';
+  const secondConfig = 'before.json';
   const result = genDiff(firstConfig, secondConfig);
   expect(result).toBe(expected);
 });
@@ -24,33 +24,33 @@ test('take difference yaml', () => {
   const firstConfig = 'file1.yml';
   const secondConfig = 'file2.yml';
   const result = genDiff(firstConfig, secondConfig);
-  expect(result).toBe(expected);
+  expect(result).toBe(expectedNested);
 });
 
 test('take difference ini', () => {
-  const firstConfig = 'before.ini';
-  const secondConfig = 'after.ini';
+  const firstConfig = 'file1.ini';
+  const secondConfig = 'file2.ini';
   const result = genDiff(firstConfig, secondConfig);
   expect(result).toBe(expected);
 });
 
 test('take difference with nested JSON files', () => {
-  const firstConfig = 'beforeNested.json';
-  const secondConfig = '/__fixtures__/afterNested.json';
+  const firstConfig = 'file1.json';
+  const secondConfig = '/__fixtures__/file2.json';
   const result = genDiff(firstConfig, secondConfig, 'stylish');
   expect(result).toBe(expectedNested);
 });
 
 test('take difference with nested JSON files, plain output', () => {
-  const firstConfig = 'beforeNested.json';
-  const secondConfig = 'afterNested.json';
+  const firstConfig = 'file1.json';
+  const secondConfig = 'file2.json';
   const result = genDiff(firstConfig, secondConfig, 'plain');
   expect(result).toBe(expectedNestedPlain);
 });
 
 test('take difference with nested JSON files, JSON output', () => {
-  const firstConfig = 'beforeNested.json';
-  const secondConfig = 'afterNested.json';
+  const firstConfig = 'file1.json';
+  const secondConfig = 'file2.json';
   const result = genDiff(firstConfig, secondConfig, 'json');
   expect(result).toBe(expectedNestedJson);
 });

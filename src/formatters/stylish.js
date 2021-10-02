@@ -42,11 +42,11 @@ export default (diff) => {
         case 'unchanged':
           return createString(' ', prepareValue(oldValue, depth));
         case 'updated':
-          return [createString('-', prepareValue(newValue, depth)),
-            createString('+', prepareValue(oldValue, depth)),
+          return [createString('-', prepareValue(oldValue, depth)),
+            createString('+', prepareValue(newValue, depth)),
           ];
         case 'complex':
-          return `${makeIndent(depth - 1)}    ${key}: {\n${iter(children, depth + 1)}\n${makeIndent(depth)}}`;
+          return `\n${makeIndent(depth - 1)}    ${key}: {${iter(children, depth + 1)}\n${makeIndent(depth)}}`;
         default:
           throw new Error(`This type: ${type} is not supported`);
       }
@@ -54,7 +54,6 @@ export default (diff) => {
   );
   const stringsCollection = iter(diff, 1);
   const rawResult = _.flattenDeep(['{', stringsCollection, '}']).join('\n');
-  const cleanResult = rawResult.replace(/(^[\t]*\n)/gm, '');
-
+  const cleanResult = rawResult.replace(/(^[\t]*\n)/gm, '').replace(/(,)/gm, '');
   return cleanResult;
 };

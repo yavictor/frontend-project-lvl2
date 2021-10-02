@@ -32,13 +32,13 @@ export default (diff) => {
         case 'complex':
           return iter(children, [...ancestors, key]);
         case 'added':
-          return `Property ${pathToProperty} was added with value: ${preparedNewValue}`;
+          return `Property '${pathToProperty}' was added with value: ${preparedNewValue}`;
         case 'removed':
-          return `Property ${pathToProperty} was removed`;
+          return `Property '${pathToProperty}' was removed`;
         case 'unchanged':
           return [];
         case 'updated':
-          return `Property ${pathToProperty} was updated. From ${preparedOldValue} to ${preparedNewValue}`;
+          return `Property '${pathToProperty}' was updated. From ${preparedOldValue} to ${preparedNewValue}`;
         default:
           throw new Error(`This type: ${type} is not supported.`);
       }
