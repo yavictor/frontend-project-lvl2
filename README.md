@@ -1,4 +1,5 @@
 # frontend-project-lvl2
+[![hexlet-check](https://github.com/yavictor/frontend-project-lvl2/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/yavictor/frontend-project-lvl2/actions/workflows/hexlet-check.yml)
 
 [![Node.js CI](https://github.com/yavictor/frontend-project-lvl2/workflows/Node.js%20CI/badge.svg)](https://github.com/yavictor/frontend-project-lvl2/actions)
 
