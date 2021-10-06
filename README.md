@@ -9,8 +9,31 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a42983ea9e9db2238a78/test_coverage)](https://codeclimate.com/github/yavictor/frontend-project-lvl2/test_coverage)
 
+### gendiff:
+
+Command line interface util that can show difference between two configuration files in json and yaml format. Also it can show only parameters that chaged in configuration and generate json result of both configs.
+
+### Install
+
+For global install:
+> composer global require yavictor/php_project2
+
+For local use:
+> composer global require yavictor/php_project2
+
+Then istall depandencies:
+
+> make install
 
 # Show difference between two 'json' files
+
+As "stylish" is default output:
+
+> gendiff first.json second.json
+
+same as
+
+> gendiff --format stylish first.json second.json
 
 [![asciicast](https://asciinema.org/a/PXv7IKbiH2lLtxgApKYNu6uZ9.svg)](https://asciinema.org/a/PXv7IKbiH2lLtxgApKYNu6uZ9)
 
